@@ -15,7 +15,7 @@ import {
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PriceBlock, PurchaseButtons, PurchasePanel } from "@/components/PurchasePanel";
-import { formatPrice, getProduct, similar } from "@/lib/products";
+import { formatPrice, getProduct, similar, type Product } from "@/lib/products";
 
 export const Route = createFileRoute("/product/$slug")({
   loader: ({ params }) => {
@@ -41,7 +41,7 @@ export const Route = createFileRoute("/product/$slug")({
 const highlightIcons = [BatteryCharging, Feather, Volume2, Cpu];
 
 function ProductPage() {
-  const { product } = Route.useLoaderData();
+  const { product } = Route.useLoaderData() as { product: Product };
   const [active, setActive] = useState(0);
 
   return (
