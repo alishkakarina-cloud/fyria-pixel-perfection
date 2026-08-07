@@ -15,7 +15,7 @@ import {
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PriceBlock, PurchaseButtons, PurchasePanel } from "@/components/PurchasePanel";
-import { formatPrice, getProduct, products, similar } from "@/lib/products";
+import { formatPrice, getProduct, similar } from "@/lib/products";
 
 export const Route = createFileRoute("/product/$slug")({
   loader: ({ params }) => {
@@ -257,4 +257,3 @@ function ProductPage() {
   );
 }
 
-export const allProducts = products;
