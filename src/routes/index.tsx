@@ -222,15 +222,6 @@ function Index() {
           <Strip items={services} />
         </section>
 
-        <div className="fy-container pb-8">
-          <Link
-            to="/product/$slug"
-            params={{ slug: products[0].slug }}
-            className="text-[12.5px] text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-          >
-            Пример карточки товара →
-          </Link>
-        </div>
       </main>
 
       <Footer />
