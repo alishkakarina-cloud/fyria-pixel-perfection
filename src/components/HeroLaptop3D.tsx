@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 
 type Props = {
   className?: string;
-  poster?: string;
 };
 
 /**
@@ -10,7 +9,7 @@ type Props = {
  * linear speed in a seamless infinite loop. All three.js work happens inside
  * a single effect so React re-renders never rebuild the scene.
  */
-export function HeroLaptop3D({ className, poster }: Props) {
+export function HeroLaptop3D({ className }: Props) {
   const hostRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -215,15 +214,7 @@ export function HeroLaptop3D({ className, poster }: Props) {
 
   return (
     <div className={className}>
-      {poster ? (
-        <img
-          src={poster}
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover opacity-60"
-        />
-      ) : null}
-      <div ref={hostRef} className="absolute inset-0 h-full w-full [&[data-ready]~*]:hidden" />
+      <div ref={hostRef} className="absolute inset-0 h-full w-full" />
     </div>
   );
 }
