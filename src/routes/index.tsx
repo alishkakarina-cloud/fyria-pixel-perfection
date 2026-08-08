@@ -99,18 +99,10 @@ function Index() {
         <section className="fy-container pt-6">
           <div className="fy-fade-up relative overflow-hidden rounded-2xl bg-ink">
             <div className="absolute inset-y-0 right-0 w-full lg:w-[62%]">
-              <video
-                className="h-full w-full object-cover"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                poster={heroPoster}
-              >
-                <source src={heroVideo.url} type="video/mp4" />
-              </video>
-              <div className="absolute inset-0 bg-linear-to-r from-ink via-ink/70 to-ink/10 lg:via-ink/40 lg:to-transparent" />
+              <ClientOnly>
+                <HeroLaptop3D className="absolute inset-0 h-full w-full" />
+              </ClientOnly>
+              <div className="pointer-events-none absolute inset-0 bg-linear-to-r from-ink via-ink/70 to-ink/10 lg:via-ink/40 lg:to-transparent" />
             </div>
 
             <div className="relative flex min-h-[400px] flex-col justify-center px-6 py-14 sm:px-10 lg:min-h-[460px] lg:max-w-[54%] lg:px-12">
