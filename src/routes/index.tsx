@@ -12,12 +12,13 @@ import {
   MessageCircle,
 } from "lucide-react";
 
+import { ClientOnly } from "@tanstack/react-router";
+
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
+import { HeroLaptop3D } from "@/components/HeroLaptop3D";
 import { categories, products, WHATSAPP_URL } from "@/lib/products";
-import heroVideo from "@/assets/hero-laptop.mp4.asset.json";
-import heroPoster from "@/assets/hero-poster.jpg";
 import bannerWorkspace from "@/assets/banner-workspace.jpg";
 
 export const Route = createFileRoute("/")({
