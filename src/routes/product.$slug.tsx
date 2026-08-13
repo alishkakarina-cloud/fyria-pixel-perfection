@@ -127,7 +127,7 @@ function ProductPage() {
               <PriceBlock product={product} />
             </div>
 
-            <PurchaseButtons className="mt-6 max-w-[320px]" />
+            <PurchaseButtons className="mt-6 max-w-[320px]" product={product} />
           </div>
 
           {/* specs */}
@@ -248,7 +248,7 @@ function ProductPage() {
 
         {/* mobile sticky purchase */}
         <div className="fixed inset-x-0 bottom-0 z-50 flex gap-2 border-t border-border bg-background/95 p-3 backdrop-blur lg:hidden">
-          <PurchaseButtons className="grid w-full grid-cols-2 gap-2 [&>a]:mt-0" />
+          <PurchaseButtons className="grid w-full grid-cols-2 gap-2 [&>a]:mt-0" product={product} />
         </div>
       </main>
 

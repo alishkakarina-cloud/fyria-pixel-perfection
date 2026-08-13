@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ShieldCheck,
   Settings2,
@@ -18,7 +18,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
 import { HeroLaptop3D } from "@/components/HeroLaptop3D";
-import { categories, products, WHATSAPP_URL } from "@/lib/products";
+import { categories, getCategoryProducts, products, WHATSAPP_URL } from "@/lib/products";
 import bannerWorkspace from "@/assets/banner-workspace.jpg";
 
 export const Route = createFileRoute("/")({
@@ -147,28 +147,44 @@ function Index() {
         <section className="fy-container pt-12" id="catalog">
           <SectionHead title="Популярные категории" />
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-            {categories.map((c) => (
-              <a
-                key={c.name}
-                href="#catalog"
-                className="group overflow-hidden rounded-xl border border-border bg-card shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:shadow-hover"
-              >
-                <div className="aspect-square bg-surface p-6">
-                  <img
-                    src={c.image}
-                    alt={c.name}
-                    loading="lazy"
-                    width={640}
-                    height={640}
-                    className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.06]"
-                  />
-                </div>
-                <div className="border-t border-border px-4 py-3">
-                  <div className="text-[12.5px] font-semibold">{c.name}</div>
-                  <div className="text-[11px] text-muted-foreground">{c.count}</div>
-                </div>
-              </a>
-            ))}
+            {categories.map((c) => {
+              const cardClass =
+                "group overflow-hidden rounded-xl border border-border bg-card shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:shadow-hover";
+              const inner = (
+                <>
+                  <div className="aspect-square bg-surface p-6">
+                    <img
+                      src={c.image}
+                      alt={c.name}
+                      loading="lazy"
+                      width={640}
+                      height={640}
+                      className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.06]"
+                    />
+                  </div>
+                  <div className="border-t border-border px-4 py-3">
+                    <div className="text-[12.5px] font-semibold">{c.name}</div>
+                    <div className="text-[11px] text-muted-foreground">{c.count}</div>
+                  </div>
+                </>
+              );
+
+              // Пустые категории продолжают вести на якорь каталога — страница без товаров бесполезна.
+              return getCategoryProducts(c.slug).length > 0 ? (
+                <Link
+                  key={c.name}
+                  to="/category/$slug"
+                  params={{ slug: c.slug }}
+                  className={cardClass}
+                >
+                  {inner}
+                </Link>
+              ) : (
+                <a key={c.name} href="#catalog" className={cardClass}>
+                  {inner}
+                </a>
+              );
+            })}
           </div>
         </section>
 

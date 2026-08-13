@@ -1,15 +1,28 @@
 import { Link } from "@tanstack/react-router";
-import { Menu, Search, Heart, Repeat2, ShoppingCart } from "lucide-react";
+import { Menu, Search, Heart, Repeat2, ShoppingCart, MessageCircle } from "lucide-react";
 
-const nav = [
-  "Ноутбуки",
-  "Планшеты",
-  "Аксессуары",
-  "Компьютерная мебель",
-  "Игровые кресла",
-  "Игровая техника",
-  "Акции",
+import { CONSULT_WHATSAPP_URL } from "@/lib/products";
+
+type NavItem = { label: string; slug?: string; href?: string };
+
+const nav: NavItem[] = [
+  // Существующие пункты — ведут на якорь каталога, как и раньше.
+  { label: "Ноутбуки" },
+  { label: "Планшеты" },
+  { label: "Аксессуары" },
+  { label: "Компьютерная мебель" },
+  { label: "Игровые кресла" },
+  { label: "Игровая техника" },
+  { label: "Акции" },
+  // Новые категории из выгрузки Kaspi.
+  { label: "Мышки", slug: "mice" },
+  { label: "Кабели", slug: "cables" },
+  { label: "Зарядки", slug: "chargers" },
+  { label: "Микрофоны", slug: "microphones" },
 ];
+
+const navItemClass =
+  "whitespace-nowrap text-[13px] text-foreground/80 transition-colors hover:text-foreground";
 
 export function Header() {
   return (
@@ -53,15 +66,31 @@ export function Header() {
         </div>
 
         <div className="no-scrollbar -mx-1 flex h-[46px] items-center gap-7 overflow-x-auto border-t border-border px-1">
-          {nav.map((item) => (
-            <a
-              key={item}
-              href="#catalog"
-              className="whitespace-nowrap text-[13px] text-foreground/80 transition-colors hover:text-foreground"
-            >
-              {item}
-            </a>
-          ))}
+          {nav.map((item) =>
+            item.slug ? (
+              <Link
+                key={item.label}
+                to="/category/$slug"
+                params={{ slug: item.slug }}
+                className={navItemClass}
+              >
+                {item.label}
+              </Link>
+            ) : (
+              <a key={item.label} href={item.href ?? "#catalog"} className={navItemClass}>
+                {item.label}
+              </a>
+            ),
+          )}
+          <a
+            href={CONSULT_WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${navItemClass} flex items-center gap-1.5`}
+          >
+            <MessageCircle className="h-3.5 w-3.5" />
+            Для консультации
+          </a>
         </div>
       </div>
     </header>

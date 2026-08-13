@@ -1,5 +1,34 @@
 import { MessageCircle } from "lucide-react";
-import { formatPrice, KASPI_URL, WHATSAPP_URL, type Product } from "@/lib/products";
+import {
+  CONSULT_WHATSAPP_URL,
+  formatPrice,
+  KASPI_URL,
+  WHATSAPP_URL,
+  type Product,
+} from "@/lib/products";
+
+/**
+ * У товаров из выгрузки Kaspi кнопки ведут на конкретную карточку продавца
+ * и на WhatsApp для консультации. Витринные товары сохраняют прежние ссылки
+ * и подписи — их страницы не должны меняться.
+ */
+function buyLinks(product?: Product) {
+  return product?.kaspiUrl
+    ? {
+        kaspiHref: product.kaspiUrl,
+        kaspiLabel: "Купить в Kaspi Магазине",
+        waHref: CONSULT_WHATSAPP_URL,
+        waLabel: "Для консультации",
+        rel: "noopener noreferrer",
+      }
+    : {
+        kaspiHref: KASPI_URL,
+        kaspiLabel: "Купить на Kaspi",
+        waHref: WHATSAPP_URL,
+        waLabel: "Написать в WhatsApp",
+        rel: "noreferrer",
+      };
+}
 
 export function PriceBlock({ product }: { product: Product }) {
   return (
@@ -19,28 +48,35 @@ export function PriceBlock({ product }: { product: Product }) {
   );
 }
 
-export function PurchaseButtons({ className = "" }: { className?: string }) {
+export function PurchaseButtons({
+  className = "",
+  product,
+}: {
+  className?: string;
+  product?: Product;
+}) {
+  const { kaspiHref, kaspiLabel, waHref, waLabel, rel } = buyLinks(product);
   return (
     <div className={className}>
       <a
-        href={KASPI_URL}
+        href={kaspiHref}
         target="_blank"
-        rel="noreferrer"
+        rel={rel}
         className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 text-[13px] font-medium text-primary-foreground transition-transform duration-200 hover:scale-[1.01]"
       >
-        Купить на Kaspi
+        {kaspiLabel}
         <span className="flex h-4 w-4 items-center justify-center rounded-full bg-destructive text-[9px] font-bold text-destructive-foreground">
           K
         </span>
       </a>
       <a
-        href={WHATSAPP_URL}
+        href={waHref}
         target="_blank"
-        rel="noreferrer"
+        rel={rel}
         className="mt-2.5 inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg border border-border px-6 text-[13px] font-medium transition-colors hover:bg-muted"
       >
         <MessageCircle className="h-4 w-4" />
-        Написать в WhatsApp
+        {waLabel}
       </a>
     </div>
   );
@@ -48,6 +84,7 @@ export function PurchaseButtons({ className = "" }: { className?: string }) {
 
 /** Second purchase panel — identical content, laid out horizontally. */
 export function PurchasePanel({ product }: { product: Product }) {
+  const { kaspiHref, kaspiLabel, waHref, waLabel, rel } = buyLinks(product);
   return (
     <div className="flex flex-col gap-6 rounded-xl border border-border bg-surface p-6 lg:flex-row lg:items-center lg:justify-between">
       <div>
@@ -58,24 +95,24 @@ export function PurchasePanel({ product }: { product: Product }) {
       </div>
       <div className="flex flex-col gap-2.5 sm:flex-row lg:w-[420px]">
         <a
-          href={KASPI_URL}
+          href={kaspiHref}
           target="_blank"
-          rel="noreferrer"
+          rel={rel}
           className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-lg bg-primary px-6 text-[13px] font-medium text-primary-foreground transition-transform duration-200 hover:scale-[1.01]"
         >
-          Купить на Kaspi
+          {kaspiLabel}
           <span className="flex h-4 w-4 items-center justify-center rounded-full bg-destructive text-[9px] font-bold text-destructive-foreground">
             K
           </span>
         </a>
         <a
-          href={WHATSAPP_URL}
+          href={waHref}
           target="_blank"
-          rel="noreferrer"
+          rel={rel}
           className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-lg border border-border bg-background px-6 text-[13px] font-medium transition-colors hover:bg-muted"
         >
           <MessageCircle className="h-4 w-4" />
-          Написать в WhatsApp
+          {waLabel}
         </a>
       </div>
     </div>

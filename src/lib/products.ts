@@ -12,8 +12,12 @@ import catAccessories from "@/assets/cat-accessories.jpg";
 import catChairs from "@/assets/cat-chairs.jpg";
 import catFurniture from "@/assets/cat-furniture.jpg";
 
+import { kaspiProducts } from "./kaspi-products";
+
 export const WHATSAPP_URL = "https://wa.me/77471234567";
 export const KASPI_URL = "https://kaspi.kz/shop/";
+/** Номер для консультаций — витрина продавца FYRIA на Kaspi. */
+export const CONSULT_WHATSAPP_URL = "https://wa.me/77079843404";
 
 export const formatPrice = (n: number) =>
   n.toLocaleString("ru-RU").replace(/,/g, " ") + " ₸";
@@ -33,14 +37,35 @@ export type Product = {
   description: string;
   specs: { label: string; value: string }[];
   highlights: string[];
+  /** Прямая ссылка на карточку товара в Kaspi Магазине (только у товаров из выгрузки Kaspi). */
+  kaspiUrl?: string;
 };
 
+const plural = (n: number) => {
+  const mod10 = n % 10;
+  const mod100 = n % 100;
+  if (mod10 === 1 && mod100 !== 11) return `${n} товар`;
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return `${n} товара`;
+  return `${n} товаров`;
+};
+
+const countIn = (name: string) => plural(kaspiProducts.filter((p) => p.category === name).length);
+
 export const categories = [
-  { name: "Ноутбуки", count: "124 товара", image: catLaptops },
-  { name: "Планшеты", count: "86 товаров", image: catTablets },
-  { name: "Аксессуары", count: "342 товара", image: catAccessories },
-  { name: "Игровые кресла", count: "78 товаров", image: catChairs },
-  { name: "Компьютерная мебель", count: "64 товара", image: catFurniture },
+  { name: "Ноутбуки", slug: "laptops", count: "124 товара", image: catLaptops },
+  { name: "Планшеты", slug: "tablets", count: "86 товаров", image: catTablets },
+  { name: "Аксессуары", slug: "accessories", count: "342 товара", image: catAccessories },
+  { name: "Игровые кресла", slug: "chairs", count: "78 товаров", image: catChairs },
+  { name: "Компьютерная мебель", slug: "furniture", count: "64 товара", image: catFurniture },
+  { name: "Мышки", slug: "mice", count: countIn("Мышки"), image: "/products/159430642-1.jpg" },
+  { name: "Кабели", slug: "cables", count: countIn("Кабели"), image: "/products/134326367-1.jpg" },
+  { name: "Зарядки", slug: "chargers", count: countIn("Зарядки"), image: "/products/142751245-1.jpg" },
+  {
+    name: "Микрофоны",
+    slug: "microphones",
+    count: countIn("Микрофоны"),
+    image: "/products/152394990-1.jpg",
+  },
 ];
 
 export const products: Product[] = [
@@ -168,4 +193,17 @@ export const similar = [
   { title: "MSI Stealth 15M", price: 799990, rating: 4.6, image: macbook3 },
 ];
 
-export const getProduct = (slug: string) => products.find((p) => p.slug === slug);
+/**
+ * Полный каталог: витринные товары ("Хиты продаж") + выгрузка с Kaspi.
+ * `products` намеренно оставлен нетронутым — на нём держится секция "Хиты продаж".
+ */
+export const allProducts: Product[] = [...products, ...kaspiProducts];
+
+export const getProduct = (slug: string) => allProducts.find((p) => p.slug === slug);
+
+export const getCategory = (slug: string) => categories.find((c) => c.slug === slug);
+
+export const getCategoryProducts = (slug: string) => {
+  const category = getCategory(slug);
+  return category ? allProducts.filter((p) => p.category === category.name) : [];
+};
