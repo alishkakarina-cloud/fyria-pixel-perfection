@@ -53,8 +53,7 @@ function CategoryPage() {
         <div className="mt-4 mb-5 flex items-end justify-between">
           <h1 className="text-[24px] font-semibold tracking-tight">{category.name}</h1>
           <span className="text-[12.5px] text-muted-foreground">
-            {items.length}{" "}
-            {items.length === 1 ? "товар" : items.length < 5 ? "товара" : "товаров"}
+            {items.length} {items.length === 1 ? "товар" : items.length < 5 ? "товара" : "товаров"}
           </span>
         </div>
 
@@ -66,9 +65,7 @@ function CategoryPage() {
           </div>
         ) : (
           <div className="rounded-xl border border-border bg-surface px-6 py-12 text-center">
-            <p className="text-[13px] text-muted-foreground">
-              В этой категории пока нет товаров.
-            </p>
+            <p className="text-[13px] text-muted-foreground">В этой категории пока нет товаров.</p>
             <Link
               to="/"
               className="mt-5 inline-flex h-11 items-center rounded-lg bg-primary px-6 text-[13px] font-medium text-primary-foreground transition-transform duration-200 hover:scale-[1.02]"

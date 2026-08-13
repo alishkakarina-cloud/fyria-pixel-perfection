@@ -59,7 +59,12 @@ export const categories = [
   { name: "Компьютерная мебель", slug: "furniture", count: "64 товара", image: catFurniture },
   { name: "Мышки", slug: "mice", count: countIn("Мышки"), image: "/products/159430642-1.jpg" },
   { name: "Кабели", slug: "cables", count: countIn("Кабели"), image: "/products/134326367-1.jpg" },
-  { name: "Зарядки", slug: "chargers", count: countIn("Зарядки"), image: "/products/142751245-1.jpg" },
+  {
+    name: "Зарядки",
+    slug: "chargers",
+    count: countIn("Зарядки"),
+    image: "/products/142751245-1.jpg",
+  },
   {
     name: "Микрофоны",
     slug: "microphones",
