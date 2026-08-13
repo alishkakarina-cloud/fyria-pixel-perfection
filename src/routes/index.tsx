@@ -18,7 +18,13 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
 import { HeroLaptop3D } from "@/components/HeroLaptop3D";
-import { categories, getCategoryProducts, products, WHATSAPP_URL } from "@/lib/products";
+import {
+  categories,
+  getCategoryCount,
+  getCategoryProducts,
+  products,
+  WHATSAPP_URL,
+} from "@/lib/products";
 import bannerWorkspace from "@/assets/banner-workspace.jpg";
 
 export const Route = createFileRoute("/")({
@@ -164,7 +170,9 @@ function Index() {
                   </div>
                   <div className="border-t border-border px-4 py-3">
                     <div className="text-[12.5px] font-semibold">{c.name}</div>
-                    <div className="text-[11px] text-muted-foreground">{c.count}</div>
+                    <div className="text-[11px] text-muted-foreground">
+                      {getCategoryCount(c.slug)}
+                    </div>
                   </div>
                 </>
               );

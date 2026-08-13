@@ -4,7 +4,7 @@ import { ChevronRight } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
-import { getCategory, getCategoryProducts, type Product } from "@/lib/products";
+import { getCategory, getCategoryCount, getCategoryProducts, type Product } from "@/lib/products";
 
 export const Route = createFileRoute("/category/$slug")({
   loader: ({ params }) => {
@@ -30,6 +30,7 @@ export const Route = createFileRoute("/category/$slug")({
 });
 
 function CategoryPage() {
+  const { slug } = Route.useParams();
   const { category, items } = Route.useLoaderData() as {
     category: { name: string };
     items: Product[];
@@ -52,9 +53,7 @@ function CategoryPage() {
 
         <div className="mt-4 mb-5 flex items-end justify-between">
           <h1 className="text-[24px] font-semibold tracking-tight">{category.name}</h1>
-          <span className="text-[12.5px] text-muted-foreground">
-            {items.length} {items.length === 1 ? "товар" : items.length < 5 ? "товара" : "товаров"}
-          </span>
+          <span className="text-[12.5px] text-muted-foreground">{getCategoryCount(slug)}</span>
         </div>
 
         {items.length > 0 ? (

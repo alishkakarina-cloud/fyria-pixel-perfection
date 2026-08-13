@@ -8,9 +8,14 @@ import mouse from "@/assets/p-mouse.jpg";
 import headset from "@/assets/p-headset.jpg";
 import catLaptops from "@/assets/cat-laptops.jpg";
 import catTablets from "@/assets/cat-tablets.jpg";
-import catAccessories from "@/assets/cat-accessories.jpg";
-import catChairs from "@/assets/cat-chairs.jpg";
 import catFurniture from "@/assets/cat-furniture.jpg";
+// Вырезаны с прозрачным фоном, поэтому под предметом виден собственный bg-surface карточки.
+import catAccessories from "@/assets/cat-accessories-fyria.png";
+import catChairs from "@/assets/cat-chairs-fyria.png";
+import catMice from "@/assets/cat-mice.png";
+import catCables from "@/assets/cat-cables.png";
+import catChargers from "@/assets/cat-chargers.png";
+import catMicrophones from "@/assets/cat-microphones.png";
 
 import { kaspiProducts } from "./kaspi-products";
 
@@ -49,27 +54,23 @@ const plural = (n: number) => {
   return `${n} товаров`;
 };
 
-const countIn = (name: string) => plural(kaspiProducts.filter((p) => p.category === name).length);
-
 export const categories = [
-  { name: "Ноутбуки", slug: "laptops", count: "124 товара", image: catLaptops },
-  { name: "Планшеты", slug: "tablets", count: "86 товаров", image: catTablets },
-  { name: "Аксессуары", slug: "accessories", count: "342 товара", image: catAccessories },
-  { name: "Игровые кресла", slug: "chairs", count: "78 товаров", image: catChairs },
-  { name: "Компьютерная мебель", slug: "furniture", count: "64 товара", image: catFurniture },
-  { name: "Мышки", slug: "mice", count: countIn("Мышки"), image: "/products/159430642-1.jpg" },
-  { name: "Кабели", slug: "cables", count: countIn("Кабели"), image: "/products/134326367-1.jpg" },
+  { name: "Ноутбуки", slug: "laptops", image: catLaptops },
+  { name: "Планшеты", slug: "tablets", image: catTablets },
+  { name: "Аксессуары", slug: "accessories", image: catAccessories },
+  { name: "Игровые кресла", slug: "chairs", image: catChairs },
+  { name: "Компьютерная мебель", slug: "furniture", image: catFurniture },
+  { name: "Мышки", slug: "mice", image: catMice },
+  { name: "Кабели", slug: "cables", image: catCables },
   {
     name: "Зарядки",
     slug: "chargers",
-    count: countIn("Зарядки"),
-    image: "/products/142751245-1.jpg",
+    image: catChargers,
   },
   {
     name: "Микрофоны",
     slug: "microphones",
-    count: countIn("Микрофоны"),
-    image: "/products/152394990-1.jpg",
+    image: catMicrophones,
   },
 ];
 
@@ -212,3 +213,11 @@ export const getCategoryProducts = (slug: string) => {
   const category = getCategory(slug);
   return category ? allProducts.filter((p) => p.category === category.name) : [];
 };
+
+/**
+ * Подпись под категорией — единственный источник правды по количеству.
+ * Считает реальные товары в категории при каждом вызове, поэтому добавление
+ * или удаление товара сразу меняет цифру везде, где эта функция вызвана.
+ * Формат прежний: "1 товар" / "3 товара" / "5 товаров".
+ */
+export const getCategoryCount = (slug: string) => plural(getCategoryProducts(slug).length);
