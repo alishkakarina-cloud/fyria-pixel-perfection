@@ -262,47 +262,6 @@ export const kaspiProducts: Product[] = [
     ],
   },
   {
-    slug: "mikrofon-fyria-yu8-chernyi-152394990",
-    title: "Микрофон FYRIA YU8 черный",
-    price: 16990,
-    rating: 5,
-    reviews: 60,
-    category: "Микрофоны",
-    sku: "038268098",
-    inStock: true,
-    kaspiUrl: "https://kaspi.kz/shop/p/mikrofon-fyria-yu8-chernyi-152394990/",
-    images: [
-      "/products/152394990-1.jpg",
-      "/products/152394990-2.jpg",
-      "/products/152394990-3.jpg",
-      "/products/152394990-4.jpg",
-    ],
-    description:
-      "Микрофон FYRIA YU8 (USB / Type-C) FYRIA YU8 — универсальный конденсаторный микрофон для игр, стриминга, записи голоса, подкастов и онлайн-общения. Оснащён интегрированной технологией шумоподавления, которая эффективно снижает окружающие звуки и делает голос чётким и разборчивым даже в шумной обстановке.",
-    specs: [
-      { label: "Разъемы", value: "XLR, USB Type-C, mini jack" },
-      { label: "Особенности", value: "ветрозащита" },
-      { label: "Длина кабеля", value: "2 м" },
-      {
-        label: "Дополнительная информация",
-        value:
-          "USB микрофон для игр, стриминга, подкастов и онлайн-общения с шумоподавлением. Plug & Play, совместим с Windows и macOS. Ойын, стриминг және дауыс жазуға арналған USB микрофон. Шу басу технологиясы, Plug & Play, Windows және macOS үйлесімді.",
-      },
-      { label: "Тип", value: "динамический" },
-      { label: "Конструкция", value: "настольный" },
-      { label: "Назначение", value: "для компьютера, для блога и стриминга" },
-      { label: "Тип подключения", value: "проводной" },
-      { label: "Радиосистема", value: "нет" },
-      { label: "Цвет", value: "черный" },
-    ],
-    highlights: [
-      "Разъемы: XLR, USB Type-C, mini jack",
-      "Особенности: ветрозащита",
-      "Длина кабеля: 2 м",
-      "Тип: динамический",
-    ],
-  },
-  {
     slug: "mikrofon-fyria-yu8-belyi-152668365",
     title: "Микрофон FYRIA YU8 белый",
     price: 16990,
