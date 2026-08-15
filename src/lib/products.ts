@@ -1,7 +1,6 @@
 import macbook1 from "@/assets/p-macbook-1.jpg";
 import macbook2 from "@/assets/p-macbook-2.jpg";
 import macbook3 from "@/assets/p-macbook-3.jpg";
-import macbook4 from "@/assets/p-macbook-4.jpg";
 import rog from "@/assets/p-rog.jpg";
 import ipad from "@/assets/p-ipad.jpg";
 import mouse from "@/assets/p-mouse.jpg";
@@ -75,35 +74,6 @@ export const categories = [
 ];
 
 export const products: Product[] = [
-  {
-    slug: "apple-macbook-air-13-m2-512gb-silver",
-    title: 'Apple MacBook Air 13" M2 512GB (Silver)',
-    price: 649990,
-    oldPrice: 724990,
-    discount: 10,
-    rating: 4.9,
-    reviews: 128,
-    category: "Ноутбуки",
-    sku: "FYRIA-MBA13-M2-512",
-    inStock: true,
-    images: [macbook1, macbook2, macbook3, macbook4],
-    description:
-      "Невероятно тонкий и мощный ноутбук Apple MacBook Air с чипом M2. Идеален для работы, учёбы и творчества. До 18 часов автономной работы, бесшумная система охлаждения и великолепный дисплей Liquid Retina.",
-    specs: [
-      { label: "Экран", value: "13.6\" Liquid Retina (2560x1664)" },
-      { label: "Процессор", value: "Apple M2" },
-      { label: "Оперативная память", value: "8GB" },
-      { label: "Накопитель", value: "512GB SSD" },
-      { label: "Видеокарта", value: "Apple M2 8-core GPU" },
-      { label: "Вес", value: "1.24 кг" },
-    ],
-    highlights: [
-      "До 18 часов работы от батареи",
-      "Лёгкий и портативный",
-      "Бесшумная работа",
-      "Мощный чип M2",
-    ],
-  },
   {
     slug: "asus-rog-zephyrus-g14",
     title: "Asus ROG Zephyrus G14 R9 6900HS / RTX 3060",
